@@ -22,6 +22,14 @@ D) 4
    1
    3
 
+E)
+Exception: stackOverflow error
+
+F)
+333
+444
+
+
 
 
 
