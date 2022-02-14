@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Felix-Wu-Programming-12-Assignments.iml" filepath="$PROJECT_DIR$/.idea/Felix-Wu-Programming-12-Assignments.iml" />
       <module fileurl="file://$PROJECT_DIR$/FlashCards/FlashCards.iml" filepath="$PROJECT_DIR$/FlashCards/FlashCards.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InterfacePractice/InterfacePractice.iml" filepath="$PROJECT_DIR$/InterfacePractice/InterfacePractice.iml" />
       <module fileurl="file://$PROJECT_DIR$/Planets/Planets.iml" filepath="$PROJECT_DIR$/Planets/Planets.iml" />
       <module fileurl="file://$PROJECT_DIR$/Worksheets/Worksheets.iml" filepath="$PROJECT_DIR$/Worksheets/Worksheets.iml" />
     </modules>
