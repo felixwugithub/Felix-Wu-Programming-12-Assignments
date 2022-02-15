@@ -49,9 +49,12 @@ public class Planet {
 
         //instead of comparing the address of the planet, it compares their designation and orbit time;
         if(o instanceof Planet){
+            if(((Planet) o).getDesignation().equals("undefined") || this.designation.equals("undefined")){
+                return false;
+            }
+
             return(this.designation.equals(((Planet) o).getDesignation())&&
                     this.orbitTime == ((Planet) o).getOrbitTime());
-
         }
         return false;
     }
