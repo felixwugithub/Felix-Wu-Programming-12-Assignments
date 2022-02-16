@@ -1,4 +1,4 @@
-package com.FelixWu.module1point1;
+package com.felixwu.module1point1;
 
 public class TwoDShape {
      double width;
