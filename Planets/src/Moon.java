@@ -45,6 +45,8 @@ public class Moon {
 
     @Override
     public boolean equals(Object o) {
+
+
       if (o instanceof Moon){
           return(this.designation.equals(((Moon) o).getDesignation()));
       }
