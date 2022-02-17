@@ -2,6 +2,15 @@ package com.felixwu.module1point4;
 
 public abstract class TwoDShape {
 
+    /**
+     * This is an abstract class for a two-dimensional shape.
+     * This class contains the width, length, and color of the shape, if relevant.
+     *
+     * for more info:
+     *   https://en.wikipedia.org/wiki/Shape
+     *   https://en.wikipedia.org/wiki/Dimension
+     */
+
     //fields
     private double width;
     private double height;
@@ -10,9 +19,13 @@ public abstract class TwoDShape {
 
     //constructors
     public TwoDShape(double width, double height, Colour colour){
-        this.width = width;
-        this.height = height;
-        this.colour = colour;
+
+        if(width >=0 && height >=0) {
+            this.width = width;
+            this.height = height;
+            this.colour = colour;
+        }
+
     }
     public TwoDShape(){
         width = 0;
@@ -22,10 +35,15 @@ public abstract class TwoDShape {
 
     //setters
     public void setHeight(double height){
-        this.height = height;
+
+        if(height >= 0) {
+            this.height = height;
+        }
     }
     public void setWidth(double width) {
-        this.width = width;
+        if(width >=0 ) {
+            this.width = width;
+        }
     }
     public void setColour(Colour colour) {
         this.colour = colour;
