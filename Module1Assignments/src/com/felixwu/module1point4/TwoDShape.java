@@ -20,10 +20,12 @@ public abstract class TwoDShape {
     //constructors
     public TwoDShape(double width, double height, Colour colour){
 
-        if(width >=0 && height >=0) {
+        if(width > 0 && height > 0) {
             this.width = width;
             this.height = height;
             this.colour = colour;
+        }else{
+            throw new IllegalArgumentException("Width and Height must be greater than 0");
         }
 
     }

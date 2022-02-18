@@ -1,8 +1,6 @@
 public class Main {
     public static void main(String[] args) {
         //Tests for all functionalities;
-
-
         Planet p1 = new Planet();
 
         System.out.println();

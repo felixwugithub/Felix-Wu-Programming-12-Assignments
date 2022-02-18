@@ -13,6 +13,10 @@ public class Main {
         System.out.println(((Triangle) t1).getOrientation());
 
 
+        TwoDShape t3 = new Triangle(1, 2, 3, Colour.NONE);
+        System.out.println(t3.getArea());
+
+
         //ArrayList of shapes as required
 
 

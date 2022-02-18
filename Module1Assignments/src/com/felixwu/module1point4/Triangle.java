@@ -37,7 +37,7 @@ public class Triangle extends TwoDShape implements Rotate {
         orientation = 0;
     }
     public Triangle(double side1, double side2, double side3, Colour colour){
-        if(side1 >= 0 && side2 >= 0 && side3 >= 0) {
+        if(side1 > 0 && side2 > 0 && side3 > 0) {
             this.side1 = side1;
             this.side2 = side2;
             this.side3 = side3;
@@ -45,6 +45,8 @@ public class Triangle extends TwoDShape implements Rotate {
             super.setWidth(side1);
             super.setColour(colour);
             orientation = 0;
+        }else {
+            throw new IllegalArgumentException("Lengths of each side must be greater than 0 ");
         }
 
     }
@@ -56,7 +58,7 @@ public class Triangle extends TwoDShape implements Rotate {
         for math lovers: https://en.wikipedia.org/wiki/Heron%27s_formula
      */
     public double getArea() {
-        if (!(side2 == 0 || side3 == 0)) {
+        if (!(side2 == 0 && side3 == 0)) {
             double semiPerimeter = (side1 + side2 + side3) / 2;
             double area = Math.sqrt(
                     semiPerimeter *
@@ -70,8 +72,12 @@ public class Triangle extends TwoDShape implements Rotate {
         }
     }
 
-    //@return the height of the triangle perpendicular to side1
-    private double heronsHeight(){
+    /**
+     *  @return the height of the triangle perpendicular to side1
+     *  NOTE: Accessibility set to public in order to run Junit Test on the method, which according to StackOverflow is a terrible practice
+     *  https://stackoverflow.com/questions/34571/how-do-i-test-a-class-that-has-private-methods-fields-or-inner-classes
+     */
+    public double heronsHeight(){
         return (this.getArea() * 2 /side1);
     }
 

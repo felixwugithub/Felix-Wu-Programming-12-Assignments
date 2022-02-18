@@ -13,8 +13,13 @@ public class Circle extends TwoDShape {
     private double radius;
 
     public Circle(double radius, Colour colour){
+
+        if(radius > 0){
         this.radius = radius;
         super.setColour(colour);
+        } else{
+            throw new IllegalArgumentException(" Radius of circle MUST be greater than 0");
+        }
     }
 
     @Override
