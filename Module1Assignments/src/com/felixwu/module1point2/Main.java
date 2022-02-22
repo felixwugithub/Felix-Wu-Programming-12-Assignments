@@ -4,6 +4,7 @@ package com.felixwu.module1point2;
 import java.util.ArrayList;
 
 public class Main {
+
     public static void main(String[] args) {
 
         ArrayList<TwoDShape> shapes = new ArrayList<>();

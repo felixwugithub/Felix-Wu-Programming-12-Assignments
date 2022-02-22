@@ -36,20 +36,9 @@ public abstract class TwoDShape {
     }
 
     //setters
-    public void setHeight(double height){
-
-        if(height >= 0) {
-            this.height = height;
-        }
-    }
-    public void setWidth(double width) {
-        if(width >=0 ) {
-            this.width = width;
-        }
-    }
-    public void setColour(Colour colour) {
-        this.colour = colour;
-    }
+    public void setHeight(double height){if(height >= 0) {this.height = height;}}
+    public void setWidth(double width) {if(width >=0 ) {this.width = width;}}
+    public void setColour(Colour colour) {this.colour = colour;}
 
     //getters
     public double getHeight() {
