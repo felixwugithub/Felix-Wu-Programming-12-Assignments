@@ -77,9 +77,14 @@ public class Triangle extends TwoDShape implements Rotate {
      *  NOTE: Accessibility set to public in order to run Junit Test on the method, which according to StackOverflow is a terrible practice
      *  https://stackoverflow.com/questions/34571/how-do-i-test-a-class-that-has-private-methods-fields-or-inner-classes
      */
-    public double heronsHeight(){
+    private double heronsHeight(){
         return (this.getArea() * 2 /side1);
     }
+    public double heronsHeightPublic(){
+        return this.heronsHeight();
+    }
+
+
 
     @Override
     public String toString() {

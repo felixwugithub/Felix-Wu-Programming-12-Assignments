@@ -22,6 +22,10 @@ class TwoDShapeTest {
 
     @org.junit.jupiter.api.Test
     void testGetAreaCircle() {
+
+        assertEquals(2,1+1);
+
+
         //unit circle
         TwoDShape c1 = new Circle(1, Colour.NONE);
         assertEquals(PI * (Math.pow(1, 2)), c1.getArea());
@@ -76,17 +80,17 @@ class TwoDShapeTest {
         //method is only used when three sides are known
         //triangle with side lengths 1, 1, 1
         TwoDShape t1 = new Triangle(1, 1, 1, Colour.NONE);
-        assertEquals(0.8660254037844386, ((Triangle) t1).heronsHeight());
+        assertEquals(0.8660254037844386, ((Triangle) t1).heronsHeightPublic());
 
         //triangle with side lengths 1, 2, 3
         TwoDShape t2 = new Triangle(1, 2, 3, Colour.NONE);
         //this triangle is actually just a line because a + b = c, which means it has a height of 0 because it's flat
-        assertEquals(0.0, (((Triangle) t2).heronsHeight()));
+        assertEquals(0.0, (((Triangle) t2).heronsHeightPublic()));
 
 
         //triangle with side lengths 99, 100, 200 (impossible triangle since a + b < c)
         TwoDShape t3 = new Triangle(99, 100, 200, Colour.NONE);
-        assertEquals(Double.NaN, ((Triangle) t3).heronsHeight());
+        assertEquals(Double.NaN, ((Triangle) t3).heronsHeightPublic());
 
     }
 }
