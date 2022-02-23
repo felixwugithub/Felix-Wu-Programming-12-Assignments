@@ -17,6 +17,9 @@ class TwoDShapeTest {
     getArea of Triangle (base & height)
     getArea of Triangle (three sides)
     heronsHeight of Triangle
+
+    if any values of the parameters when constructing a triangle is equal to 0, the shape will not construct, therefore
+    there is no need to test it.
      */
 
 
@@ -24,7 +27,6 @@ class TwoDShapeTest {
     void testGetAreaCircle() {
 
         assertEquals(2,1+1);
-
 
         //unit circle
         TwoDShape c1 = new Circle(1, Colour.NONE);
@@ -71,9 +73,7 @@ class TwoDShapeTest {
         TwoDShape t3 = new Triangle(99, 100, 200, Colour.NONE);
         assertEquals(Double.NaN, t3.getArea());
 
-
     }
-
 
     @org.junit.jupiter.api.Test
     void heronsHeight() {
