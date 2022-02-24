@@ -18,8 +18,8 @@ class TwoDShapeTest {
     getArea of Triangle (three sides)
     heronsHeight of Triangle
 
-    if any values of the parameters when constructing a triangle is equal to 0, the shape will not construct, therefore
-    there is no need to test it.
+    If any of the fields when constructing a shape is equal to or less than 0, an IllegalArgumentException error will be
+    thrown. Therefore, the tests will not test said cases.
      */
 
 
