@@ -1,5 +1,4 @@
 package com.felixwu.deckofcards;
 
-public class Card {
-
+public enum face {
 }
