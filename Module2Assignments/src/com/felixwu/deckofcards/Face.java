@@ -1,4 +1,5 @@
 package com.felixwu.deckofcards;
 
-public enum face {
+public enum Face {
+    KING, QUEEN, JACK
 }
