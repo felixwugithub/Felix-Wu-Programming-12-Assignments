@@ -48,27 +48,6 @@ public class Card implements Comparable<Card>{
 
     }
 
-    public int compareSuit(Object otherCard){
-        if(otherCard instanceof Card){
-            if(this.getSuit().ordinal() < ((Card) otherCard).getSuit().ordinal()){
-                return 1;
-            }else if(this.getSuit().ordinal() == ((Card) otherCard).getSuit().ordinal()) {
-
-                if (this.getValue() > ((Card) otherCard).getValue()) {
-                    return 1;
-                } else if (this.getValue() == ((Card) otherCard).getValue()) {
-                    return 0;
-                } else {
-                    return -1;
-                }
-            }else{
-                return -1;
-            }
-        }else{
-            return 99999;
-        }
-    }
-
 
     @Override
     public int compareTo(Card otherCard) {
@@ -84,4 +63,5 @@ public class Card implements Comparable<Card>{
             return Integer.MAX_VALUE;
         }
     }
+
 }

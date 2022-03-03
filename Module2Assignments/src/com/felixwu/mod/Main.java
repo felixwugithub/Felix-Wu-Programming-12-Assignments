@@ -6,7 +6,8 @@ import java.util.Collections;
 import java.util.List;
 
 
-//Cards will be sorted in the order: Ace, 2, 3, ... , 10, Jack, Queen, King, based on the card game "Fight the Landlord"
+//Cards will be sorted in the order: 2, 3, ... , 10, Jack, Queen, King, Ace based on the card game "Fight the Landlord"
+//sorted from weakest card to superior, so from low values to high, and also by suit, so from diamonds to spades
 
 public class Main {
     public static void main(String[] args) {
@@ -54,7 +55,14 @@ public class Main {
         System.out.println("------------");
         sortDeck(deck);
         printDeck(deck);
-        System.out.println("deck has been completely sorted. ");
+        shuffleDeck(deck);
+        printDeck(deck);
+        sortDeck(deck);
+        printDeck(deck);
+        System.out.println("deck has been completely sorted. " +
+                "" +
+                "Cards sorted in the order: 2, 3, ... , 10, Jack, Queen, King, Ace based on the card game \"Fight the Landlord\"." +
+                " Each number is additionally sorted in the order diamonds, clubs, hearts, spades (weakest to superior) ");
 
     }
 
