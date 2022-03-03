@@ -82,6 +82,7 @@ public class Main {
         for (int i = 0; i < size; i++) {
             deck.remove(hand.get(i));
         }
+        
         return hand;
     }
 }
