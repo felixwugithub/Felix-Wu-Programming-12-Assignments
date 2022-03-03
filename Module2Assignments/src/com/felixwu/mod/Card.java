@@ -2,7 +2,7 @@ package com.felixwu.mod;
 
 import java.util.Objects;
 
-public class Card {
+public class Card implements Comparable<Card>{
     private int value;
     private Suit suit;
 
@@ -40,26 +40,6 @@ public class Card {
         this.value = value;
     }
 
-    public int compareValue(Object otherCard){
-        if(otherCard instanceof Card){
-            if(this.getValue() > ((Card) otherCard).getValue()){
-                return 1;
-            }else if(this.getValue() == ((Card) otherCard).getValue()) {
-                if(this.getSuit().ordinal() < ((Card) otherCard).getSuit().ordinal()){
-                    return 1;
-                }else if(this.getSuit().ordinal() == ((Card) otherCard).getSuit().ordinal()){
-                    return 0;
-                }else{
-                    return -1;
-                }
-            }else{
-                return -1;
-            }
-        }else{
-            return 99999;
-        }
-    }
-
 
     public String toString(){
         String card = "";
@@ -90,5 +70,18 @@ public class Card {
     }
 
 
-
+    @Override
+    public int compareTo(Card otherCard) {
+        if(otherCard != null){
+            if(this.getValue() > ((Card) otherCard).getValue()){
+                return 1;
+            }else if(this.getValue() == ((Card) otherCard).getValue()) {
+                return Integer.compare(((Card) otherCard).getSuit().ordinal(), this.getSuit().ordinal());
+            }else{
+                return -1;
+            }
+        }else{
+            return Integer.MAX_VALUE;
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package com.felixwu.mod;
 
+import java.util.Objects;
+
 public class FaceCard extends Card{
     private Face face;
 
@@ -11,6 +13,20 @@ public class FaceCard extends Card{
     @Override
     public String toString() {
         return (face + " of " + String.valueOf(super.getSuit()));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        FaceCard faceCard = (FaceCard) o;
+        return face == faceCard.face;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), face);
     }
 
     public Face getFace() {
