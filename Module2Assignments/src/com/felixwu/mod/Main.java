@@ -10,7 +10,7 @@ public class Main {
 
         for (int i = 1; i <=13 ; i++){
 
-            if(i > 1 || i < 11){
+            if(i > 1 && i < 11){
                     deck.add(new Card(i, Suit.SPADES));
                     deck.add(new Card(i, Suit.HEARTS));
                     deck.add(new Card(i, Suit.CLUBS));
@@ -43,6 +43,11 @@ public class Main {
             System.out.println(c);
 
         }
+
+        System.out.println("Shuffling deck... ");
+
+
+        
 
 
     }

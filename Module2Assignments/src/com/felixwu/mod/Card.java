@@ -1,8 +1,23 @@
 package com.felixwu.mod;
 
+import java.util.Objects;
+
 public class Card {
     private int value;
     private Suit suit;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card card = (Card) o;
+        return value == card.value && suit == card.suit;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, suit);
+    }
 
     public Card(int value, Suit suit){
         this.value = value;
@@ -23,13 +38,6 @@ public class Card {
 
     public void setValue(int value) {
         this.value = value;
-    }
-    @Override
-    public String toString() {
-        return "Card{" +
-                "value=" + value +
-                ", suit=" + suit +
-                '}';
     }
 
     public int compareValue(Object otherCard){
@@ -53,6 +61,13 @@ public class Card {
     }
 
 
+    public String toString(){
+        String card = "";
+        card += String.valueOf(this.value) + " of " + this.getSuit();
+        return card;
+
+    }
+
     public int compareSuit(Object otherCard){
         if(otherCard instanceof Card){
             if(this.getSuit().ordinal() < ((Card) otherCard).getSuit().ordinal()){
@@ -73,4 +88,7 @@ public class Card {
             return 99999;
         }
     }
+
+
+
 }
