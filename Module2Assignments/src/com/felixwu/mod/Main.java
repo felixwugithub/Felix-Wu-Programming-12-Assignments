@@ -44,46 +44,45 @@ public class Main {
             }
         }
 
-        System.out.println("Here's your default deck of cards: ");
         shuffleDeck(deck);
+        sortDeck(deck);
         printDeck(deck);
 
-        System.out.println("------------");
-        System.out.println("");
-        System.out.println("SORTING DECK");
-        System.out.println("");
-        System.out.println("------------");
-        sortDeck(deck);
+        System.out.println("HANDING OUT CARDS!!!!!" +
+                "\n ----------------------");
+        List<Card> hand = buildHand(deck, 15);
+        printDeck(hand);
+
+        System.out.println("----------------- \n remaining cards:" +
+                "\n -------------------------");
         printDeck(deck);
-        shuffleDeck(deck);
-        printDeck(deck);
-        sortDeck(deck);
-        printDeck(deck);
-        System.out.println("deck has been completely sorted. " +
-                "" +
-                "Cards sorted in the order: 2, 3, ... , 10, Jack, Queen, King, Ace based on the card game \"Fight the Landlord\"." +
-                " Each number is additionally sorted in the order diamonds, clubs, hearts, spades (weakest to superior) ");
+
+
 
     }
 
     public static void sortDeck(List<Card> deck) {
         Collections.sort(deck);
+        System.out.println("deck has been completely sorted. " +
+                "" +
+                "Cards sorted in the order: 2, 3, ... , 10, Jack, Queen, King, Ace based on the card game \"Fight the Landlord\"." +
+                " Each number is additionally sorted in the order diamonds, clubs, hearts, spades (weakest to superior) ");
     }
-
-
-    public static void sortOnlyBySuit(List<Card> deck){
-
-    }
-
-    public static void printDeck(List<Card> deck){
-        for (Card c: deck
-             ) {
-            System.out.println(c);
-        }
-    }
+    public static void printDeck(List<Card> deck){for (Card c: deck) {System.out.println(c);}}
 
     public static void shuffleDeck(List<Card> deck){
         Collections.shuffle(deck);
+        System.out.println("Deck shuffled!");
+    }
+    public static List<Card> buildHand(List<Card> deck, int size){
+        List hand = new ArrayList();
+        for (int i = 0; i < size; i++) {
+            hand.add(deck.get(i));
+        }
+        for (int i = 0; i < size; i++) {
+            deck.remove(hand.get(i));
+        }
+        return hand;
     }
 }
 
