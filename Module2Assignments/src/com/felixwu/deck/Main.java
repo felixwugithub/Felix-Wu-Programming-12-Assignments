@@ -1,4 +1,4 @@
-package com.felixwu.mod;
+package com.felixwu.deck;
 
 import javax.lang.model.type.ArrayType;
 import java.util.ArrayList;

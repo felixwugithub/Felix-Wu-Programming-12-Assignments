@@ -1,4 +1,4 @@
-package com.felixwu.mod;
+package com.felixwu.deck;
 
 import java.util.Objects;
 
