@@ -2,6 +2,12 @@ package com.felixwu.deck;
 
 import java.util.Objects;
 
+/**
+ * Face card subclass
+ *
+ * has a Enum representing its face.
+ */
+
 public class FaceCard extends Card{
     private Face face;
 

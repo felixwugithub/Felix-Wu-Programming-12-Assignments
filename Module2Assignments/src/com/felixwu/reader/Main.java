@@ -8,7 +8,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
-        //an integer representing the amount of words THAT ONLY APPEAR ONCE (I seemed to have misunderstood the meaning of "Unique"
+        //an integer representing the amount of words THAT ONLY APPEAR ONCE (I seemed to have misunderstood the meaning of "Unique")
         int uniqueWordCount = 0;
 
         File file = new File("illiad.txt");
@@ -31,7 +31,6 @@ public class Main {
                     textSet.add(word.toLowerCase());
                 }
             }
-
 
 
             for (String word: wordSet

@@ -2,6 +2,15 @@ package com.felixwu.deck;
 
 import java.util.Objects;
 
+/**
+ * Class representing a playing card in a deck.
+ *
+ * Standard 52 card deck with suit, face, and value attributes.
+ *
+ * https://en.wikipedia.org/wiki/Standard_52-card_deck
+ *
+ */
+
 public class Card implements Comparable<Card>{
     private int value;
     private Suit suit;
@@ -47,6 +56,9 @@ public class Card implements Comparable<Card>{
         return card;
 
     }
+
+
+    //compares two cards. Numbers take precedence, suit is secondary.
 
 
     @Override
