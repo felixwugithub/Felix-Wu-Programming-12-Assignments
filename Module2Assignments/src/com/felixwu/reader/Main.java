@@ -26,24 +26,18 @@ public class Main {
                 }
             }
 
-            int progress = 0;
-            int total = wordSet.size();
             for (String word: wordSet
                  ) {
-                progress++;
-
-                System.out.println("Checking " + progress + " th word out of " + total + " different words.");
                int occurrences = Collections.frequency(textSet, word);
                 if (occurrences == 1){
-
                     uniqueWordCount++;
+                    System.out.println("FOUND UNIQUE WORD: " + word);
                 }
-
-
             }
 
+            System.out.println("There are ");
             System.out.println(uniqueWordCount);
-
+            System.out.println("Unique words");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
