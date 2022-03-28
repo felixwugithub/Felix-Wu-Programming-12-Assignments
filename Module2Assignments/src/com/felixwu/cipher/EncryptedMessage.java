@@ -9,3 +9,4 @@ public class EncryptedMessage {
         this.message = message;
     }
 }
+

@@ -7,13 +7,16 @@ import java.util.List;
 
 
 //Cards will be sorted in the order: 2, 3, ... , 10, Jack, Queen, King, Ace based on the card game "Fight the Landlord"
-//sorted from weakest card to superior, so from low values to high, and also by suit, so from diamonds to spades
+//sorted from the weakest card to superior, so from low values to high, and also by suit, so from diamonds to spades
+//I got special approval from Mr. Zaremba to make it so the values take precedence over suits.
 
 public class Main {
     public static void main(String[] args) {
 
         List<Card> deck = new ArrayList<Card>(52);
 
+
+        //simply creates a deck with every card in a typical deck
         for (int i = 2; i <= 14; i++) {
 
             if (i < 11) {
@@ -61,6 +64,8 @@ public class Main {
 
     }
 
+
+
     public static void sortDeck(List<Card> deck) {
         Collections.sort(deck);
         System.out.println("deck has been completely sorted. " +
@@ -82,7 +87,6 @@ public class Main {
         for (int i = 0; i < size; i++) {
             deck.remove(hand.get(i));
         }
-        
         return hand;
     }
 }

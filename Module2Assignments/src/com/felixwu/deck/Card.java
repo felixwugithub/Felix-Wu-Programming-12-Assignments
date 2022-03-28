@@ -57,10 +57,7 @@ public class Card implements Comparable<Card>{
 
     }
 
-
-    //compares two cards. Numbers take precedence, suit is secondary.
-
-
+    //compares two cards. Numbers take precedence, suit is secondary (Intentional)
     @Override
     public int compareTo(Card otherCard) {
         if(otherCard != null){
