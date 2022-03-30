@@ -5,10 +5,30 @@ import java.util.Locale;
 
 public class Cipher {
 
+    /*
+    Caesar Cipher Class
+
+The Caesar cipher is one of the earliest known and simplest ciphers.
+ It is a type of substitution cipher in which each letter in the plaintext
+ is 'shifted' a certain number of places down the alphabet.
+ For example, with a shift of 1, A would be replaced by B, B would become C,
+  and so on. The method is named after Julius Caesar,
+ who apparently used it to communicate with his generals.
+
+ plain:  abcdefghijklmnopqrstuvwxyz
+cipher: bcdefghijklmnopqrstuvwxyza
+
+     */
+
     private final static char alphabet[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
     private int key;
     private HashMap charMap = new HashMap<Character, Integer>();
+
+
+    //Using Maps create a class that allows someone to instantiate with a number between 1 and 25
+    // representing the number of shifts.  Have 2 methods one that
+    // encrypts a message from their chosen shift and one that decrypts from chosen shift.
 
     public Cipher(int key){
         this.key = key;
@@ -39,6 +59,8 @@ public class Cipher {
         charMap.put('Y', 24);
         charMap.put('Z', 25);
     }
+
+
 
     public String encrypt(String in){
         String encryptedText = "";
