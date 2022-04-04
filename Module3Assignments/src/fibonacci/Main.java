@@ -16,6 +16,6 @@ public class Main {
 //does this count as 2 lines? LOL
     public static int fibonacci(int a, int b, int limit, int sum){
         if(limit > 1) return (fibonacci(b, a+b, limit-1, sum+b));
-        else return (sum);
+        else return sum;
     }
 }
