@@ -15,9 +15,6 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         setupTree();
         explore(graph.get(0));
-        for (int i = 0; i < explored.size(); i++) {
-            System.out.println(explored.get(i));
-        }
 
     }
 
@@ -31,17 +28,14 @@ public class Main {
     }
 
     private static void explore(Node node){
-        if(!queue.contains(node)){
-            System.out.println(node);
+            System.out.println("exploring: " + node);
             queue.add(node);
-            explored.add(node);
-
             for (int i = 0; i < node.getNodes().size(); i++) {
-                if(!queue.contains(graph.get(node.getNodes().get(i)))){
-                    queue.add(graph.get(node.getNodes().get(i)));
+                if(!queue.contains(graph.get(node.getNodes().get(i)-1))){
+                    queue.add(graph.get(node.getNodes().get(i)-1));
                 }
             }
-        }
+            explored.add(node);
 
         for(int i = 0; i < queue.size(); i++) {
             if(!explored.contains(queue.get(i))){
