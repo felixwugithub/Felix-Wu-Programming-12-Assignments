@@ -1,11 +1,34 @@
 package sortingHomework;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        //unsorted array
+        ArrayList<Integer> randomNumbersOneToHundred = new ArrayList<>();
+
+        System.out.println("Random Array: ");
+        for (int i = 0; i < 100; i++) {
+            randomNumbersOneToHundred.add((int) (Math.random() * 100));
+            System.out.print(randomNumbersOneToHundred.get(i) + ", ");
+        }
+
+
+        //sorted array
+        System.out.println("");
+        System.out.println("SORTED ARRAY: ");
+        ArrayList<Integer> sorted = new ArrayList<>();
+        sorted = mergeSort(randomNumbersOneToHundred);
+        for (int i = 0; i < sorted.size(); i++) {
+            System.out.print(sorted.get(i) + ">=");
+        }
+
+
+
         ArrayList<Integer> arr1 = new ArrayList<>();
         arr1.add(22);
         arr1.add(17);
@@ -31,16 +54,46 @@ public class Main {
 
 
 
+
+
         ArrayList<Integer> arrM = new ArrayList<>();
         arrM = merge(arr1, arr2);
 
-        for (Integer num: arrM
-             ) {
-            System.out.println(num);
-
-        }
 
     }
+    public static ArrayList<Integer> mergeSort(ArrayList<Integer> array){
+
+        if(array.size() <= 1){
+            return array;
+        }
+
+        int midPoint = array.size() / 2;
+
+        ArrayList<Integer> left = new ArrayList<>();
+        ArrayList<Integer> right = new ArrayList<>();
+
+
+
+        for (int i = 0; i < midPoint; i++) {
+            left.add(array.get(i));
+        }
+        for (int i = 0; i < array.size()-midPoint; i++) {
+            right.add(array.get(i+midPoint));
+        }
+
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+        left = mergeSort(left);
+        right = mergeSort(right);
+
+        result = merge(left, right);
+
+        return result;
+    }
+
+
+
 
     public static ArrayList merge(ArrayList<Integer> arrayList1, ArrayList<Integer> arrayList2){
         ArrayList<Integer> mergedArray = new ArrayList<>();
