@@ -18,6 +18,7 @@ public class Main {
         }
 
 
+
         //sorted array
         System.out.println("");
         System.out.println("SORTED ARRAY: ");
