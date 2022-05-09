@@ -6,21 +6,29 @@ import java.awt.event.*;
 
 
 public class Gridder extends JFrame
-                                        implements MouseListener, MouseMotionListener,
-                                                            ActionListener {
+        implements MouseListener, MouseMotionListener,
+        ActionListener {
      
-    protected final int gridCount=100;  //how many squares wide our drawing area is
-    protected int[][] grid = new int[gridCount][gridCount]; //create the matrix         
-    private final int squareSize=5; //the size length of individual squares in pixels
-    private final int gridSize=gridCount*squareSize;  //size of entire draw grid in pixels
-    private final int offSet=50;  //how far from top/left edge do we draw the grid
-    private int penColor = 1; //keeps track of current drawing color
-    private Color[] colors; //our array of colors
-    private Image ib;  //we do all drawing onto this image, it acts as an image buffer
-    private Graphics ibg;  //will be set to our image buffer's graphic object
+    protected final int GridSize =100;
+    //size of grid
+
+    protected int[][] grid = new int[GridSize][GridSize];
+    //creates grid
+
+    private final int squareSize=5;
+    //the size length of individual squares
+
+    private final int gridSize= GridSize *squareSize;
+
+    private final int offSet=50;
+
+    private int penColor = 1;
+    private Color[] colors;
+    private Image imageI;
+    private Graphics imageBackground;
     private String filename;
     
-    private Timer timmy;
+    private Timer timer;
     private boolean active=false;
     private int stepDelay = 500;
     private Color borderColor=new Color(20,20,20);
@@ -28,27 +36,21 @@ public class Gridder extends JFrame
     
     //constructor for our GridderFrame
     public Gridder() {
-        initComponents();
-        addMouseListener(this);  //registers this frame to receive mouse clicks
-        addMouseMotionListener(this); //register this frame to receive mouse motions
-        setUpImageBuffer();
-        takeCareOfResizing();
-        setUpColors();
-        clearGrid();
-        draw();
+        initComponents(); addMouseListener(this); addMouseMotionListener(this);
+        setUpImageBuffer(); resize(); setUpColors();
+        clearGrid(); draw();
     }
 
     
-    //set our image (buffer) to a new image of the correct size
+    //set image buffer size
     public void setUpImageBuffer(){
-        ib=this.createImage(gridSize+1,gridSize+1);
-        ibg=ib.getGraphics();
+        imageI =this.createImage(gridSize+1,gridSize+1);
+        imageBackground = imageI.getGraphics();
     }
 
     
-    //experimental code that redraws the grid after user resizes the window
-    //works some of the time... still in progress
-    public void takeCareOfResizing(){
+    //redraws grid
+    public void resize(){
          this.addComponentListener(new ComponentAdapter() {
            public void componentResized(ComponentEvent e) {
               draw(); 
@@ -66,10 +68,10 @@ public class Gridder extends JFrame
     }
     
     
-    //fills the grid with 1's (represents white!)
+    //fills the grid
     public void clearGrid(){
-        for(int c=0; c<gridCount; c++)
-            for(int r=0; r<gridCount; r++)
+        for(int c = 0; c< GridSize; c++)
+            for(int r = 0; r< GridSize; r++)
                 grid[c][r]=0;
 
         draw();
@@ -81,34 +83,29 @@ public class Gridder extends JFrame
     public void mouseEntered(MouseEvent e) { }
     public void mouseExited(MouseEvent e) {  }
     
-    
-    //will use the mouse x and y coordinates and figure out which square in the
-    //draw area was clicked and pass this information to the clickGrid method
+
+    //draw area based on mouse click
     public void mouseClicked(MouseEvent e) { 
         int x = e.getX(); int y = e.getY(); 
         int row = (y-offSet)/squareSize;
         int col = (x-offSet)/squareSize;
         System.out.println("Click: " + col + ", " + row);
-        //if inside our grid, call clickGrid passing it the col and row
-        if ( (row>=0) && (row<gridCount) && (col>=0) && (col<gridCount) )
+        if ( (row>=0) && (row< GridSize) && (col>=0) && (col< GridSize) )
            clickGrid(col, row);
     }
   
-    
-    //will use the mouse x and y coordinates and figure out which square in the
-    //draw area dragging is occurring and pass this information to the clickGrid method    
+
+    //draw area based on mouse drag
     public void mouseDragged(MouseEvent e) { 
       int x = e.getX(); int y = e.getY(); 
       int row = (y-offSet )/squareSize;
       int col = (x-offSet )/squareSize;
       System.out.println("Drag:  " + col + ", " + row);
-      //if inside our grid, call dragGrid passint it the col and row
-      if ( (row>=0) && (row<gridCount) && (col>=0) && (col<gridCount) )
+      if ( (row>=0) && (row< GridSize) && (col>=0) && (col< GridSize) )
          dragGrid(col, row);       
     }
-    
-    public void mouseMoved(MouseEvent e) { 
-        //System.out.println("Moving at " + e.getX() + "," +  e.getY() );  
+
+    public void mouseMoved(MouseEvent e) {
     }
     
     //set a square in the grid to the color value as long as the values are valid
@@ -118,51 +115,40 @@ public class Gridder extends JFrame
     }
     
     
-    //any mouse click is forwarded to this method with the col and row of the
-    //square clicked provided as parameters.  Comes from public void mouseClicked.
+    //mouse click coordinates
     public void clickGrid( int col, int row ){
         colorSquare(col, row, penColor); 
     }
     
     
-    //any mouse drag is forwarded to this method with the col and row of the
-    //square dragged over provided as parameters.  Comes from public void mouseDragged.
+    //stroke coordinates
     public void dragGrid( int col, int row) {
         colorSquare(col, row, penColor);   
     }
     
     
-    //draws the image based on the values stored in the grid.
-    //we will draw on the image buffer's graphics object and then when we are
-    //all done we will copy the image buffer onto the Frame's graphic object.
+    //draws the image based on stored information
     public void draw(){
         
-        //clear the area, draw white background
-        ibg.clearRect(0, 0, gridSize,gridSize);
-        ibg.setColor(Color.white);
-        ibg.fillRect(0, 0, gridSize, gridSize);
-        
-        //draws individual squares (pass this method the frames graphics object
-        drawSquares(ibg);
-        
-        //draws a black border around edge of grid
-        ibg.setColor(Color.black);
-        ibg.drawRect(0,0,gridSize,gridSize);
-        
-        //all done drawing your stuff onto the image buffer?
-        //get the frame's graphics object and draw our image buffer onto the frame
+
+        imageBackground.clearRect(0, 0, gridSize,gridSize);
+        imageBackground.setColor(Color.white);
+        imageBackground.fillRect(0, 0, gridSize, gridSize);
+        drawSquares(imageBackground);
+
+        imageBackground.setColor(Color.black);
+        imageBackground.drawRect(0,0,gridSize,gridSize);
+
         Graphics g = this.getGraphics();
-        g.drawImage(ib,offSet,offSet,this);
+        g.drawImage(imageI,offSet,offSet,this);
     }
     
     
-    //draws the individual colored squares that make the grid using the values
-    //stored in the grid matrix.
+    //draws individual colored squares
     public void drawSquares(Graphics g){
-       //draw each square (remember that squareSize is size of each square...
        g.setColor(Color.black);
-       for(int r=0; r<gridCount; r++){
-           for(int c=0; c<gridCount; c++) {
+       for(int r = 0; r< GridSize; r++){
+           for(int c = 0; c< GridSize; c++) {
                g.setColor(colors[ grid[c][r] ] );
                g.fillRect(c*squareSize, r*squareSize, squareSize, squareSize);      
                g.setColor(borderColor);
@@ -538,8 +524,7 @@ public class Gridder extends JFrame
        
     //saves the current picture data in CS format
     private void buttonSaveActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
-      //String curDir = System.getProperty("user.dir");
-      //System.out.println("Your directory is " + curDir);
+
       FileChooser FC = new FileChooser();
       FC.selectFile();
       filename=FC.getDirPath() +"/"+ FC.getFileName();
@@ -548,8 +533,8 @@ public class Gridder extends JFrame
       
       FileOutput FO = new FileOutput(filename,"w");
     
-      for(int r=0; r<gridCount; r++) {
-         for(int c=0; c<gridCount; c++) {
+      for(int r = 0; r< GridSize; r++) {
+         for(int c = 0; c< GridSize; c++) {
              int num = grid[c][r];
              if (num<10)
                  FO.print("0"+num);
@@ -562,7 +547,7 @@ public class Gridder extends JFrame
         
     }//GEN-LAST:event_buttonSaveActionPerformed
 
-    //opens a CS format file and loads the image data into the grid
+    //loads image data
     private void buttonOpenActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonOpenActionPerformed
       FileChooser FC = new FileChooser();
       FC.selectFile();
@@ -572,23 +557,21 @@ public class Gridder extends JFrame
       
       FileInput FI = new FileInput(filename);
       int num=FI.numberOfLines();
-      if (num!=gridCount){
-          System.out.println("Not enough lines in file!");
+      if (num!= GridSize){
+          System.out.println("failed to load.");
           return;
       }
       
-      //read each row.  go through row two characters at a time and convert to number
-      for(int r=0; r<gridCount; r++) {
+      //read image data
+      for(int r = 0; r< GridSize; r++) {
           String line = FI.readLine();                         //read the next line
-          for(int c=0; c<gridCount; c++){                 //or (int c=0; c<gridCount*2; c=c+2)
+          for(int c = 0; c< GridSize; c++){                 //or (int c=0; c<gridCount*2; c=c+2)
               String temp=line.substring(c*2, c*2+2);   //0,2,4,6,8,...
               int value=Integer.parseInt(temp);           //convert to int
               grid[c][r]=value;                                  //put in grid
           }
       }
       FI.close();
-      
-      //lets see what you just read!
       draw();
       
     }//GEN-LAST:event_buttonOpenActionPerformed
@@ -611,57 +594,43 @@ public class Gridder extends JFrame
         penColor=1;
     }//GEN-LAST:event_buttonWhiteActionPerformed
 
-    public boolean isAlive(int c, int r) {
-        //if cell is in grid and alive, return true
-        //outside grid or not alive, return false
-        return(true);
-    }
     
     private void jButtonStepActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonStepActionPerformed
         step();
     }//GEN-LAST:event_jButtonStepActionPerformed
 
-    public int countNeighbors(int c, int r){
-       return(0);
-    }
     
     public void step() {
-        //empty now
-        //sample code, take this out!   randomly pick a spot to turn white
-        int col = (int)(Math.random()*gridCount);
-        int row = (int)(Math.random()*gridCount);
+        //draw random
+
+        int col = (int)(Math.random()* GridSize);
+        int row = (int)(Math.random()* GridSize);
         grid[col][row] = 1;
-        
-        
-        //leave this in here or you won't see anything happen!
         draw();
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        //this event is called by the timer...
-        //System.out.println("Calling Step...");
-        //System.out.println(e.getSource());
         step();
     }
     
     private void jButtonRunActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButtonRunActionPerformed
-        //create timer if it doesn't exist.  If it does exist, turn it on!
+    //timer
         System.out.println("Run/Pause Button Pressed");
         if (active==false) {
-            if (timmy==null) {
-              timmy=new Timer(stepDelay,this);
-              timmy.setInitialDelay(100); 
-              timmy.setDelay(stepDelay);
+            if (timer ==null) {
+              timer =new Timer(stepDelay,this);
+              timer.setInitialDelay(100);
+              timer.setDelay(stepDelay);
             }
             
-            timmy.start();
+            timer.start();
             active=true;
             jButtonRun.setText("Pause...");
         }
         else { //turn timer off
             active=false;
-            timmy.stop();
+            timer.stop();
             jButtonRun.setText("Run...");
         }
     }//GEN-LAST:event_jButtonRunActionPerformed
@@ -672,23 +641,23 @@ public class Gridder extends JFrame
         if (stepDelay==0) {
             stepDelay=1;
         }
-        if (timmy!=null)
-            timmy.setDelay(stepDelay);
+        if (timer !=null)
+            timer.setDelay(stepDelay);
     }//GEN-LAST:event_jSliderDelayStateChanged
 
     private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.out.println("1");
         for (int i = 0; i < 100; i++) {
-            int col = (int)(Math.random()*gridCount);
-            int row = (int)(Math.random()*gridCount);
+            int col = (int)(Math.random()* GridSize);
+            int row = (int)(Math.random()* GridSize);
             grid[col][row] = 1;
         }
         draw();
     }//GEN-LAST:event_jButton1ActionPerformed
     private void jButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         System.out.println("2");
-        int col = (int)(Math.random()*gridCount);
-        for (int i = 0; i < gridCount; i++) {
+        int col = (int)(Math.random()* GridSize);
+        for (int i = 0; i < GridSize; i++) {
             grid[col][i] = 1;
         }
         draw();
@@ -696,9 +665,9 @@ public class Gridder extends JFrame
 
     private void jButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.out.println("3");
-        for (int i = 0; i < gridCount; i++) {
-            for (int j = 0; j < gridCount; j++) {
-                if (j < gridCount / 2) {
+        for (int i = 0; i < GridSize; i++) {
+            for (int j = 0; j < GridSize; j++) {
+                if (j < GridSize / 2) {
                     grid[i][j] = 1;
                 } else {
                     grid[i][j] = 0;
@@ -713,8 +682,8 @@ public class Gridder extends JFrame
     private void jButton4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("4");
         int count = 0;
-        for (int i = 0; i < gridCount; i++) {
-            for (int j = 0; j < gridCount; j++) {
+        for (int i = 0; i < GridSize; i++) {
+            for (int j = 0; j < GridSize; j++) {
                 if (grid[i][j] == 1) {
                     count++;
                 }
@@ -726,8 +695,8 @@ public class Gridder extends JFrame
     private void jButton5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("5");
         clearGrid();
-        for (int i = 0; i < gridCount; i++) {
-            grid[i][gridCount-1-i] = 1;
+        for (int i = 0; i < GridSize; i++) {
+            grid[i][GridSize -1-i] = 1;
             grid[i][i] = 1;
         }
         draw();
@@ -736,8 +705,8 @@ public class Gridder extends JFrame
         System.out.println("6");
 
         // reverse the color
-        for (int i = 0; i < gridCount; i++) {
-            for (int j = 0; j < gridCount; j++) {
+        for (int i = 0; i < GridSize; i++) {
+            for (int j = 0; j < GridSize; j++) {
                 if (grid[i][j] == 1) {
                     grid[i][j] = 0;
                 } else {
@@ -752,17 +721,17 @@ public class Gridder extends JFrame
     private void jButton7ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.out.println("7");
         // adding whites to the border
-        int[][] temp = new int[gridCount][gridCount];
+        int[][] temp = new int[GridSize][GridSize];
 
         // copy original grid;
-        for (int row = 0; row < gridCount; row++) {
-            for (int col = 0; col < gridCount; col++) {
+        for (int row = 0; row < GridSize; row++) {
+            for (int col = 0; col < GridSize; col++) {
                 temp[col][row] = grid[col][row];
             }
         }
 
-        for (int row=1; row<gridCount-1; row++)
-            for (int col=1; col<gridCount-1; col++) {
+        for (int row = 1; row< GridSize -1; row++)
+            for (int col = 1; col< GridSize -1; col++) {
                 if (grid[col][row-1]==1)  //check above
                     temp[col][row]= 1;
                 if (grid[col][row+1]==1)  //check below
@@ -773,8 +742,8 @@ public class Gridder extends JFrame
                     temp[col][row]=1;
             }
 
-        for (int row=0; row< gridCount; row++) {
-            for (int col = 0; col < gridCount; col++){
+        for (int row = 0; row< GridSize; row++) {
+            for (int col = 0; col < GridSize; col++){
                 grid[col][row] = temp[col][row];
             }
         }
@@ -811,6 +780,7 @@ public class Gridder extends JFrame
 
 
     public static void main(String args[]) {
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Gridder().setVisible(true);
@@ -818,8 +788,7 @@ public class Gridder extends JFrame
         });
     }
     
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+
     private JButton buttonBlack;
     private JButton buttonClear;
     private JButton buttonOpen;
@@ -848,6 +817,6 @@ public class Gridder extends JFrame
     private JScrollPane jScrollPane1;
     private JSlider jSliderDelay;
     private JTextField textInfo;
-    // End of variables declaration//GEN-END:variables
 
-} //end of class
+
+}
