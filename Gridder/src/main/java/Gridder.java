@@ -732,13 +732,13 @@ public class Gridder extends JFrame
 
         for (int row = 1; row< GridSize -1; row++)
             for (int col = 1; col< GridSize -1; col++) {
-                if (grid[col][row-1]==1)  //check above
+                if (grid[col][row-1]==1)
                     temp[col][row]= 1;
-                if (grid[col][row+1]==1)  //check below
+                if (grid[col][row+1]==1)
                     temp[col][row] = 1;
-                if (grid[col-1][row]==1 ) //check to the left
+                if (grid[col-1][row]==1 )
                     temp[col][row]=1;
-                if (grid[col+1][row]==1) //check to the right
+                if (grid[col+1][row]==1)
                     temp[col][row]=1;
             }
 
@@ -750,7 +750,22 @@ public class Gridder extends JFrame
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
     private void jButton8ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        System.out.println("8");
+
+        int temp = 0;
+        for (int i = 0; i < GridSize-1; i++) {
+            for (int j = 0; j < GridSize; j++) {
+
+                if(i == 0){
+                    temp = grid[i][j];}
+                grid[i][j] = grid[i+1][j];
+                if(i== GridSize - 1){
+
+                }
+
+            }
+        }
+
+
 
         draw();
     }//GEN-LAST:event_jButton11ActionPerformed
