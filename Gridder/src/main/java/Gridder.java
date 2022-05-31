@@ -751,18 +751,21 @@ public class Gridder extends JFrame
     }//GEN-LAST:event_jButton11ActionPerformed
     private void jButton8ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
 
-        int temp = 0;
+        int[] temp = new int[GridSize];
         for (int i = 0; i < GridSize-1; i++) {
             for (int j = 0; j < GridSize; j++) {
-
                 if(i == 0){
-                    temp = grid[i][j];}
-                grid[i][j] = grid[i+1][j];
-                if(i== GridSize - 1){
-
+                    temp[j] = grid[0][j];
                 }
-
+                grid[i][j] = grid[i+1][j];
+                
             }
+        }
+
+        for (int i = 0; i < GridSize; i++) {
+
+            grid[GridSize-1][i] = temp[i];
+
         }
 
 
