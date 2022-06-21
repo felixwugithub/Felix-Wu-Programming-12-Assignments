@@ -26,9 +26,21 @@ public class Projectile {
         double velocityX = Math.cos(launchAngle) * launchVelocity;
         return (int) ( velocityX * time + 0.5);
     }
+
+    public int getMaxHeight(){
+        double velocityY = Math.sin(launchAngle) * launchVelocity;
+        int maxHeight = (int)( Math.pow(velocityY, 2) / (2 * g));
+        return maxHeight;
+    }
+
+    public int getMaxDistance(){
+        return (int)((Math.pow(launchVelocity, 2) * Math.sin(2 * launchAngle))/g);
+    }
+
+
     public int getPositionY(double time){
         double velocityY = Math.sin(launchAngle) * launchVelocity;
-        return (int) (velocityY * time - 0.5*g*Math.pow(time, 2));
+        return (int) (velocityY * time - 0.5*g*Math.pow(time, 2) + 0.5);
 
 
     }
