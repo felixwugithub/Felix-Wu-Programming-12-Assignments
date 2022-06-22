@@ -37,6 +37,9 @@ public class Projectile {
         return (int)((Math.pow(launchVelocity, 2) * Math.sin(2 * launchAngle))/g);
     }
 
+    public int getFlightTime(){
+        return (int) ((int) this.getMaxDistance()/ (Math.cos(launchAngle) * launchVelocity));
+    }
 
     public int getPositionY(double time){
         double velocityY = Math.sin(launchAngle) * launchVelocity;
