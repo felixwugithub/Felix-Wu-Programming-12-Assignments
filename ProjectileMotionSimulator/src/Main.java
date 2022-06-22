@@ -12,17 +12,17 @@ public class Main {
         double launchVelocity = 0;
         final double PI = 3.1415926;
 
+        System.out.println("---------------------------------------------------------");
         System.out.println("Welcome to Felix's simple 2D projectile motion simulator.");
-
         System.out.println("Please enter the initial conditions of the projectile.");
 
         System.out.println();
-        System.out.println("launch angle (degrees): ");
+        System.out.println("launch angle (degrees 0 ~ 90): ");
         angle = Double.parseDouble(input.nextLine());
         launchAngle = angle/180 * PI;
-        System.out.println("launch velocity (m/s): ");
+        System.out.println("launch velocity (m/s) [I recommend keeping this below 30]: ");
         launchVelocity = input.nextDouble();
-        System.out.println("Downward acceleration due to gravity (m/s^2): ");
+        System.out.println("Downward acceleration due to gravity (default 9.8 m/s^2): ");
         g = input.nextDouble();
 
         Projectile bullet = new Projectile(launchAngle, launchVelocity, g);
@@ -33,7 +33,7 @@ public class Main {
             int x = bullet.getPositionX(time);
             int y = bullet.getMaxHeight()+4 - bullet.getPositionY(time);
             space[y][x] = true;
-            time = time + 0.5;
+            time = time + 0.25;
         }
 
         space[bullet.getMaxHeight()+4][bullet.getMaxDistance()+1] = true;
@@ -56,7 +56,7 @@ public class Main {
         System.out.println("Gravity: " + g + "m/s^2 down");
 
         System.out.println("");
-        System.out.println("Flight Data: ");
+        System.out.println("Flight Data (Truncated to int): ");
         System.out.println("Max vertical height: " + bullet.getMaxHeight() + " m");
         System.out.println("Range: " + bullet.getMaxDistance() + " m");
         System.out.println("Time of flight: " + bullet.getFlightTime() + " s");
