@@ -20,27 +20,6 @@ public class DatabaseHandler {
         return handler;
     }
 
-    private void createTable() {
-        String TABLE_NAME = "MEMBER";
-        try{
-            stmt = conn.createStatement();
-            DatabaseMetaData dmn = conn.getMetaData();
-            ResultSet tables = dmn.getTables(null,null,TABLE_NAME,null);
-            if(tables.next()){
-                System.out.println("Table "+TABLE_NAME+" already exists");
-            }else{
-                String statement = "CREATE TABLE "+TABLE_NAME+"("
-                        + "id varchar(200) primary key, \n"
-                        + "name varchar(200), \n"
-                        + "email varchar(200), \n"
-                        + "nickname varchar(200))";
-                stmt.execute(statement);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void createFileList() {
         String TABLE_NAME = name; // folder name
         try{

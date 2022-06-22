@@ -9,31 +9,8 @@ import java.util.Scanner;
 public class Main {
     public static com.felix.database.DatabaseHandler handler;
 
-    public static void addMember(String id, String name, String email, String nickName){ // Add members
-        String qu = "INSERT INTO MEMBER VALUES (" +
-                "'" + id + "'," +
-                "'" + name + "'," +
-                "'" + email + "'," +
-                "'" + nickName + "')";
-        handler.execAction(qu);
-    }
 
-
-    public static void retrieveInfoMember() { // get info from member table
-        String qu = "SELECT * FROM MEMBER";
-        ResultSet resultSet = handler.execQuery(qu);
-        try{
-            while (resultSet.next()){
-                String id = resultSet.getString("ID");
-                String name = resultSet.getString("NAME");
-                System.out.println("Entry: ID" + id + "\tName: " + name);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void retrieveInfoFile(String table) { // get info from specified folder
+    public static void retrieveFileInfo(String table) { // get info from specified folder
         String qu = "SELECT * FROM "+ table;
         ResultSet resultSet = handler.execQuery(qu);
         try{
@@ -48,6 +25,7 @@ public class Main {
          e.printStackTrace();
         }
     }
+
 
     public static void addFiles(String name, String path, String extension, String fileSize){ // add info thru absolute path
         String qu = "INSERT INTO "+ DatabaseHandler.name +" (name, path, extension, file_size) VALUES (" +
@@ -72,7 +50,7 @@ public class Main {
             System.out.println("folder name: ");
             String tableName = myObj.nextLine();
             handler = DatabaseHandler.getHandler(); // null handler when folder has no name
-            retrieveInfoFile(tableName);
+            retrieveFileInfo(tableName);
         }
 
     }
