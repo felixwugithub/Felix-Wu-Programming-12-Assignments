@@ -1,8 +1,9 @@
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Scanner input = new Scanner(System.in);
         double g = 9.8;
@@ -33,16 +34,17 @@ public class Main {
             int y = bullet.getMaxHeight()+4 - bullet.getPositionY(time);
             space[y][x] = true;
             time = time + 0.5;
-
         }
+
+        space[bullet.getMaxHeight()+4][bullet.getMaxDistance()+1] = true;
 
         for (int i = 0; i < space.length; i++) {
             for (int j = 0; j < space[i].length ; j++) {
                 if(space[i][j] == false){
                     System.out.print(" . ");
-                }else{
-
+                }else {
                     System.out.print(" ■ ");
+                    TimeUnit.MILLISECONDS.sleep(125);
                 }
             }
             System.out.println();
@@ -52,6 +54,9 @@ public class Main {
         System.out.println("Launch Angle: " + angle + " degrees");
         System.out.println("Launch Velocity: "  + launchVelocity + " m/s");
         System.out.println("Gravity: " + g + "m/s^2 down");
+
+        System.out.println("");
+        System.out.println("Flight Data: ");
         System.out.println("Max vertical height: " + bullet.getMaxHeight() + " m");
         System.out.println("Range: " + bullet.getMaxDistance() + " m");
         System.out.println("Time of flight: " + bullet.getFlightTime() + " s");
