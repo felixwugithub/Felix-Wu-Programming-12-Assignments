@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         Scanner input = new Scanner(System.in);
-        double g = 9.8;
+        final double G = 9.8;
         double launchAngle = 0;
         double angle = 0;
         double launchVelocity = 0;
@@ -22,10 +22,8 @@ public class Main {
         launchAngle = angle/180 * PI;
         System.out.println("launch velocity (m/s) [I recommend keeping this below 30]: ");
         launchVelocity = input.nextDouble();
-        System.out.println("Downward acceleration due to gravity (default 9.8 m/s^2): ");
-        g = input.nextDouble();
 
-        Projectile bullet = new Projectile(launchAngle, launchVelocity, g);
+        Projectile bullet = new Projectile(launchAngle, launchVelocity, G);
         boolean[][] space = new boolean [bullet.getMaxHeight() + 5][bullet.getMaxDistance() + 5];
 
         double time = 0;
@@ -36,24 +34,28 @@ public class Main {
             time = time + 0.25;
         }
 
-        space[bullet.getMaxHeight()+4][bullet.getMaxDistance()+1] = true;
+        space[bullet.getMaxHeight()+4][bullet.getMaxDistance()] = true;
+        space[4][bullet.getMaxDistance()/2] = true;
 
         for (int i = 0; i < space.length; i++) {
             for (int j = 0; j < space[i].length ; j++) {
                 if(space[i][j] == false){
                     System.out.print(" . ");
                 }else {
-                    System.out.print(" ■ ");
-                    TimeUnit.MILLISECONDS.sleep(125);
+                    System.out.print(" ⦿ ");
+                    int waitTime = (int) (Math.random()*333);
+                    TimeUnit.MILLISECONDS.sleep(waitTime);
                 }
             }
             System.out.println();
         }
 
+
+        System.out.println("(the distance between two dots represent 1 meter) ");
+        System.out.println("");
         System.out.println("Initial Conditions: ");
         System.out.println("Launch Angle: " + angle + " degrees");
         System.out.println("Launch Velocity: "  + launchVelocity + " m/s");
-        System.out.println("Gravity: " + g + "m/s^2 down");
 
         System.out.println("");
         System.out.println("Flight Data (Truncated to int): ");

@@ -9,18 +9,6 @@ public class Projectile {
         this.g = g;
     }
 
-    public void setLaunchAngle(double launchAngle) {
-        this.launchAngle = launchAngle;
-    }
-
-
-    public void setLaunchVelocity(double launchVelocity) {
-        this.launchVelocity = launchVelocity;
-    }
-
-    public void setG(double g) {
-        this.g = g;
-    }
 
     public int getPositionX(double time){
         double velocityX = Math.cos(launchAngle) * launchVelocity;
@@ -29,7 +17,7 @@ public class Projectile {
 
     public int getMaxHeight(){
         double velocityY = Math.sin(launchAngle) * launchVelocity;
-        int maxHeight = (int)( Math.pow(velocityY, 2) / (2 * g));
+        int maxHeight = (int)( Math.pow(velocityY, 2) / (2 * g) + 0.5);
         return maxHeight;
     }
 
@@ -38,7 +26,7 @@ public class Projectile {
     }
 
     public int getFlightTime(){
-        return (int) ((int) this.getMaxDistance()/ (Math.cos(launchAngle) * launchVelocity));
+        return (int) ((int) this.getMaxDistance()/ (Math.cos(launchAngle) * launchVelocity) +  0.5) ;
     }
 
     public int getPositionY(double time){
