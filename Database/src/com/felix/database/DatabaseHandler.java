@@ -10,7 +10,7 @@ public class DatabaseHandler {
 
     public DatabaseHandler() {
         createConnection();
-        createFileList();
+        createList();
     }
 
     public static DatabaseHandler getHandler() {
@@ -20,7 +20,7 @@ public class DatabaseHandler {
         return handler;
     }
 
-    private void createFileList() {
+    private void createList() {
         String TABLE_NAME = name; // folder name
         try{
             stmt = conn.createStatement();
@@ -57,7 +57,7 @@ public class DatabaseHandler {
         }
     }
 
-    public boolean execAction(String qu) {
+    public boolean doThings(String qu) {
         try{
             stmt = conn.createStatement();
             stmt.execute(qu);
@@ -66,7 +66,7 @@ public class DatabaseHandler {
         return false;
     }
 
-    public ResultSet execQuery(String query) {
+    public ResultSet doThingsAgain(String query) {
         ResultSet resultSet;
         try{
             stmt = conn.createStatement();

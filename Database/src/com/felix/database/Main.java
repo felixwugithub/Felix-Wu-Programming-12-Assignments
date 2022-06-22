@@ -12,7 +12,7 @@ public class Main {
 
     public static void retrieveFileInfo(String table) { // get info from specified folder
         String qu = "SELECT * FROM "+ table;
-        ResultSet resultSet = handler.execQuery(qu);
+        ResultSet resultSet = handler.doThingsAgain(qu);
         try{
             while (resultSet.next()){
                 String name = resultSet.getString("NAME");
@@ -28,12 +28,12 @@ public class Main {
 
 
     public static void addFiles(String name, String path, String extension, String fileSize){ // add info thru absolute path
-        String qu = "INSERT INTO "+ DatabaseHandler.name +" (name, path, extension, file_size) VALUES (" +
+        String statement = "INSERT INTO "+ DatabaseHandler.name +" (name, path, extension, file_size) VALUES (" +
                 "'" + name + "'," +
                 "'" + path + "'," +
                 "'" + extension + "'," +
                 "'" + fileSize + "')";
-        handler.execAction(qu);
+        handler.doThings(statement);
     }
 
     public static void main(String[] args) {
